@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Além do Kimono — Ateliê Autoral</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fontes Google: Cinzel, Lora, Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Configuração de Cores do Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        shinku: '#74070E',     /* Blood Red */
+                        kinari: '#F4E3B2',     /* Vanilla */
+                        uguisu: '#45462A',     /* Drab Dark Brown */
+                        haizakura: '#947268',  /* Cinereous */
+                        kurotobi: '#310E10',   /* Black Bean */
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        lora: ['Lora', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Padronização do Padrão de Ondas Seigaiha em SVG no Fundo */
+        .bg-seigaiha {
+            background-color: #310E10;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 40a40 40 0 0 1 40-40 40 40 0 0 1 40 40H70A30 30 0 0 0 40 10 30 30 0 0 0 10 40H0zm20 0a20 20 0 0 1 20-20 20 20 0 0 1 20 20h-5a15 15 0 0 0-15-15 15 15 0 0 0-15 15h-5zm20 0a40 40 0 0 1 40-40 40 40 0 0 1 40 40h-10a30 30 0 0 0-30-30 30 30 0 0 0-30 30h-10z' fill='%2374070E' fill-opacity='0.15'/%3E%3C/svg%3E");
+        }
+
+        .bg-seigaiha-light {
+            background-color: #310E10;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 40a40 40 0 0 1 40-40 40 40 0 0 1 40 40H70A30 30 0 0 0 40 10 30 30 0 0 0 10 40H0zm20 0a20 20 0 0 1 20-20 20 20 0 0 1 20 20h-5a15 15 0 0 0-15-15 15 15 0 0 0-15 15h-5zm20 0a40 40 0 0 1 40-40 40 40 0 0 1 40 40h-10a30 30 0 0 0-30-30 30 30 0 0 0-30 30h-10z' fill='%23F4E3B2' fill-opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #310E10;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #74070E;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #947268;
+        }
+    </style>
+</head>
+
+<body class="bg-kurotobi text-kinari font-sans antialiased selection:bg-shinku selection:text-kinari">
+
+    <!-- Toast Notification Dynamic Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header
+        class="sticky top-0 z-40 bg-kurotobi/90 backdrop-blur-md border-b border-shinku/30 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex flex-col group">
+                <span
+                    class="font-cinzel text-xl sm:text-2xl font-bold tracking-widest text-kinari group-hover:text-shinku transition-colors">ALÉM
+                    DO KIMONO</span>
+                <span class="font-lora italic text-xs tracking-wider text-haizakura">Ateliê Autoral — Yasmin Chrispim &
+                    Apolo</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#historia" class="hover:text-kinari/80 text-kinari transition-colors">Nossa História</a>
+                <a href="#paleta" class="hover:text-kinari/80 text-kinari transition-colors">Paleta & Filosofia</a>
+                <a href="#vitrine" class="hover:text-kinari/80 text-kinari transition-colors">Vitrine do Ateliê</a>
+                <a href="#quiz" class="hover:text-kinari/80 text-kinari transition-colors">Quiz de Estilo</a>
+                <a href="#avaliacoes" class="hover:text-kinari/80 text-kinari transition-colors">Avaliações</a>
+                <a href="#encomenda"
+                    class="px-4 py-2 rounded-lg bg-shinku hover:bg-shinku/80 text-kinari border border-kinari/20 transition-all font-cinzel text-xs font-semibold tracking-wider uppercase shadow-md hover:shadow-shinku/30">
+                    Encomendar Sob Medida
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" aria-label="Abrir menu"
+                class="md:hidden text-kinari hover:text-shinku focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-kurotobi border-b border-shinku/40 px-4 pt-2 pb-6 space-y-3">
+            <a href="#historia" class="mobile-nav-link block py-2 text-kinari border-b border-shinku/20">Nossa
+                História</a>
+            <a href="#paleta" class="mobile-nav-link block py-2 text-kinari border-b border-shinku/20">Paleta &
+                Filosofia</a>
+            <a href="#vitrine" class="mobile-nav-link block py-2 text-kinari border-b border-shinku/20">Vitrine do
+                Ateliê</a>
+            <a href="#quiz" class="mobile-nav-link block py-2 text-kinari border-b border-shinku/20">Quiz de Estilo</a>
+            <a href="#avaliacoes"
+                class="mobile-nav-link block py-2 text-kinari border-b border-shinku/20">Avaliações</a>
+            <a href="#encomenda"
+                class="mobile-nav-link block mt-4 text-center py-3 rounded-lg bg-shinku text-kinari font-cinzel font-bold">Encomendar
+                Sob Medida</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section
+        class="relative min-h-[85vh] flex items-center justify-center bg-seigaiha px-4 sm:px-6 lg:px-8 py-20 overflow-hidden border-b border-shinku/30">
+        <div class="absolute inset-0 bg-gradient-to-b from-kurotobi/80 via-transparent to-kurotobi pointer-events-none">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center space-y-8">
+            <div
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-shinku/20 border border-shinku/50 text-kinari text-xs uppercase font-cinzel tracking-widest animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-shinku"></span> Projeto Acadêmico — 3º AD Marketing — Prof.
+                Maurício
+            </div>
+
+            <h1
+                class="font-cinzel text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-kinari leading-tight">
+                ALÉM DO KIMONO
+            </h1>
+
+            <p class="font-lora text-lg sm:text-2xl italic text-haizakura max-w-2xl mx-auto font-light leading-relaxed">
+                "A alta costura reinterpretada pela essência da estética japonesa contemporânea. Do croqui ao caimento
+                impecável."
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
+                <a href="#quiz"
+                    class="w-full sm:w-auto px-8 py-4 rounded-xl bg-shinku hover:bg-shinku/90 text-kinari font-cinzel font-bold text-sm tracking-widest uppercase transition-all shadow-lg hover:shadow-shinku/40 flex items-center justify-center gap-3 group border border-kinari/30">
+                    <span>Descobrir Meu Vestido Ideal</span>
+                    <i class="fa-solid fa-wand-magic-sparkles group-hover:rotate-12 transition-transform"></i>
+                </a>
+
+                <a href="#vitrine"
+                    class="w-full sm:w-auto px-8 py-4 rounded-xl bg-uguisu/40 hover:bg-uguisu/60 text-kinari border border-kinari/30 font-cinzel font-semibold text-sm tracking-widest uppercase transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-eye"></i>
+                    <span>Explorar Vitrine</span>
+                </a>
+            </div>
+
+            <div class="pt-12 text-xs text-haizakura/70 tracking-widest font-sans uppercase">
+                Criadores Autorais: <strong class="text-kinari font-semibold">Yasmin Chrispim</strong> & <strong
+                    class="text-kinari font-semibold">Apolo</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- PALETA DE CORES OFICIAL (COPIÁVEL) -->
+    <section id="paleta" class="py-20 bg-kurotobi border-b border-shinku/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-kinari tracking-wide">PALETA OFICIAL DO
+                    ATELIÊ</h2>
+                <div class="w-24 h-1 bg-shinku mx-auto rounded-full"></div>
+                <p class="font-lora text-haizakura text-base sm:text-lg">
+                    Cores inspiradas nos pigmentos tradicionais do Japão. Clique em qualquer card para copiar o código
+                    HEX e o nome oficial em japonês.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Color 1: Blood Red -->
+                <div onclick="copyColor('#74070E', 'Shinku (真朱) - Blood Red')"
+                    class="group cursor-pointer bg-kurotobi/60 border border-shinku/30 hover:border-kinari/50 rounded-2xl p-4 transition-all hover:-translate-y-2 shadow-xl hover:shadow-shinku/20">
+                    <div class="w-full h-32 rounded-xl bg-[#74070E] shadow-inner mb-4 flex items-end justify-end p-3">
+                        <span
+                            class="text-xs font-mono text-kinari/80 bg-black/40 px-2 py-1 rounded backdrop-blur">#74070E</span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cinzel font-bold text-kinari text-lg">Shinku</h3>
+                            <span class="text-xs font-serif italic text-haizakura">真朱</span>
+                        </div>
+                        <p class="text-xs text-haizakura uppercase font-medium">Blood Red</p>
+                        <p class="text-xs text-kinari/70 pt-2 font-lora">Paixão, intensidade e nobreza da alta costura.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Color 2: Vanilla -->
+                <div onclick="copyColor('#F4E3B2', 'Kinari-iro (生成色) - Vanilla')"
+                    class="group cursor-pointer bg-kurotobi/60 border border-shinku/30 hover:border-kinari/50 rounded-2xl p-4 transition-all hover:-translate-y-2 shadow-xl hover:shadow-shinku/20">
+                    <div class="w-full h-32 rounded-xl bg-[#F4E3B2] shadow-inner mb-4 flex items-end justify-end p-3">
+                        <span
+                            class="text-xs font-mono text-kurotobi font-bold bg-white/60 px-2 py-1 rounded backdrop-blur">#F4E3B2</span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cinzel font-bold text-kinari text-lg">Kinari-iro</h3>
+                            <span class="text-xs font-serif italic text-haizakura">生成色</span>
+                        </div>
+                        <p class="text-xs text-haizakura uppercase font-medium">Vanilla</p>
+                        <p class="text-xs text-kinari/70 pt-2 font-lora">A pureza do algodão cru e tecidos naturais.</p>
+                    </div>
+                </div>
+
+                <!-- Color 3: Drab Dark Brown -->
+                <div onclick="copyColor('#45462A', 'Uguisucha (鶯茶) - Drab Dark Brown')"
+                    class="group cursor-pointer bg-kurotobi/60 border border-shinku/30 hover:border-kinari/50 rounded-2xl p-4 transition-all hover:-translate-y-2 shadow-xl hover:shadow-shinku/20">
+                    <div class="w-full h-32 rounded-xl bg-[#45462A] shadow-inner mb-4 flex items-end justify-end p-3">
+                        <span
+                            class="text-xs font-mono text-kinari/80 bg-black/40 px-2 py-1 rounded backdrop-blur">#45462A</span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cinzel font-bold text-kinari text-lg">Uguisucha</h3>
+                            <span class="text-xs font-serif italic text-haizakura">鶯茶</span>
+                        </div>
+                        <p class="text-xs text-haizakura uppercase font-medium">Drab Dark Brown</p>
+                        <p class="text-xs text-kinari/70 pt-2 font-lora">Sobriedade orgânica e elegância discreta.</p>
+                    </div>
+                </div>
+
+                <!-- Color 4: Cinereous -->
+                <div onclick="copyColor('#947268', 'Haizakura (灰桜) - Cinereous')"
+                    class="group cursor-pointer bg-kurotobi/60 border border-shinku/30 hover:border-kinari/50 rounded-2xl p-4 transition-all hover:-translate-y-2 shadow-xl hover:shadow-shinku/20">
+                    <div class="w-full h-32 rounded-xl bg-[#947268] shadow-inner mb-4 flex items-end justify-end p-3">
+                        <span
+                            class="text-xs font-mono text-kinari/80 bg-black/40 px-2 py-1 rounded backdrop-blur">#947268</span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cinzel font-bold text-kinari text-lg">Haizakura</h3>
+                            <span class="text-xs font-serif italic text-haizakura">灰桜</span>
+                        </div>
+                        <p class="text-xs text-haizakura uppercase font-medium">Cinereous</p>
+                        <p class="text-xs text-kinari/70 pt-2 font-lora">A flor de cerejeira acinzentada e efêmera.</p>
+                    </div>
+                </div>
+
+                <!-- Color 5: Black Bean -->
+                <div onclick="copyColor('#310E10', 'Kurotobi (黒鳶) - Black Bean')"
+                    class="group cursor-pointer bg-kurotobi/60 border border-shinku/30 hover:border-kinari/50 rounded-2xl p-4 transition-all hover:-translate-y-2 shadow-xl hover:shadow-shinku/20">
+                    <div
+                        class="w-full h-32 rounded-xl bg-[#310E10] border border-shinku/40 shadow-inner mb-4 flex items-end justify-end p-3">
+                        <span
+                            class="text-xs font-mono text-kinari/80 bg-black/60 px-2 py-1 rounded backdrop-blur">#310E10</span>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-cinzel font-bold text-kinari text-lg">Kurotobi</h3>
+                            <span class="text-xs font-serif italic text-haizakura">黒鳶</span>
+                        </div>
+                        <p class="text-xs text-haizakura uppercase font-medium">Black Bean</p>
+                        <p class="text-xs text-kinari/70 pt-2 font-lora">Profundidade atemporal e mistério estruturado.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE O ATELIÊ E CONCEITOS FILOSÓFICOS JAPONESES -->
+    <section id="historia" class="py-20 bg-seigaiha border-b border-shinku/30 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                <!-- Left Box: História da Marca -->
+                <div
+                    class="space-y-6 bg-kurotobi/90 p-8 sm:p-10 rounded-3xl border border-shinku/40 backdrop-blur-md shadow-2xl">
+                    <span class="text-xs font-cinzel uppercase tracking-widest text-shinku font-bold">Origem
+                        Autoral</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-kinari">POR QUE SURGIU O 'ALÉM DO
+                        KIMONO'?</h2>
+                    <p class="font-lora text-kinari/90 text-base sm:text-lg leading-relaxed">
+                        O projeto <strong>Além do Kimono — Ateliê Autoral</strong> foi idealizado pelos alunos
+                        <strong>Yasmin Chrispim</strong> e <strong>Apolo</strong> para a disciplina de Marketing do 3º
+                        AD, sob a orientação e coordenação do <strong>Prof. Maurício</strong>.
+                    </p>
+                    <p class="font-lora text-haizakura text-sm sm:text-base leading-relaxed">
+                        A marca nasceu do desejo de romper as amarras do fast fashion e desconstruir a rigidez
+                        estrutural do tradicional kimono japonês. Reinterpretamos suas mangas amplas, faixas (Obi)
+                        drapeadas e recortes simétricos para transformá-los em vestidos de alta costura contemporâneos
+                        sob medida, celebrando a individualidade de cada cliente.
+                    </p>
+                    <div class="pt-4 border-t border-shinku/30 flex items-center gap-4 text-xs font-cinzel text-kinari">
+                        <div><i class="fa-solid fa-graduation-cap text-shinku mr-2"></i>3º AD — Marketing</div>
+                        <div><i class="fa-solid fa-user-tie text-shinku mr-2"></i>Prof. Maurício</div>
+                    </div>
+                </div>
+
+                <!-- Right Box: Conceitos Filosóficos Ma & Shibui -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Concept 1: Ma -->
+                    <div
+                        class="bg-kurotobi/80 p-6 rounded-2xl border border-shinku/30 space-y-4 hover:border-kinari/40 transition-all">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-shinku/20 border border-shinku flex items-center justify-center text-shinku text-2xl font-bold">
+                            間
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-kinari">Ma (間)</h3>
+                        <p class="text-xs uppercase tracking-widest text-haizakura font-semibold">O Espaço em Branco</p>
+                        <p class="font-lora text-sm text-kinari/80 leading-relaxed">
+                            A filosofia do "vazio com significado". Na alta costura do ateliê, representa a leveza entre
+                            o tecido e a pele, os respiros no caimento que deixam o corpo mover-se com graça poética.
+                        </p>
+                    </div>
+
+                    <!-- Concept 2: Shibui -->
+                    <div
+                        class="bg-kurotobi/80 p-6 rounded-2xl border border-shinku/30 space-y-4 hover:border-kinari/40 transition-all">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-uguisu/30 border border-uguisu flex items-center justify-center text-kinari text-2xl font-bold">
+                            渋い
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-kinari">Shibui (渋い)</h3>
+                        <p class="text-xs uppercase tracking-widest text-haizakura font-semibold">Elegância Discreta</p>
+                        <p class="font-lora text-sm text-kinari/80 leading-relaxed">
+                            A beleza sutil e madura, sem ostentação aparente. Um luxo silencioso revelado nas costuras
+                            internas ocultas, na nobreza da seda e na precisão de cada dobra autoral.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- VITRINE DO ATELIÊ -->
+    <section id="vitrine" class="py-20 bg-kurotobi border-b border-shinku/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <span class="text-xs font-cinzel text-shinku uppercase font-bold tracking-widest">Processo Criativo &
+                    Galeria</span>
+                <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-kinari">VITRINE DO ATELIÊ</h2>
+                <div class="w-24 h-1 bg-shinku mx-auto rounded-full"></div>
+                <p class="font-lora text-haizakura text-sm sm:text-base">
+                    Do esboço conceitual ao vestir da cliente. Conheça as etapas do processo criativo e editorial do
+                    nosso ateliê autoral.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Quadro 1: Croquis Autorais -->
+                <div
+                    class="bg-kurotobi/80 border border-shinku/40 rounded-3xl p-6 flex flex-col justify-between hover:border-kinari/50 transition-all shadow-xl group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-cinzel text-xs font-bold text-shinku tracking-wider">01. CONCEITO</span>
+                            <span class="text-xs text-haizakura">Croqui Autoral</span>
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-kinari">Croquis & Traços</h3>
+
+                        <!-- Image Display Container -->
+                        <div onclick="openLightbox('img/Gemini_Generated_Image_dlrhj9dlrhj9dlrh.jfif', '01. Croquis & Traços — Yasmin Chrispim & Apolo')"
+                            class="relative w-full aspect-[3/4] bg-kurotobi rounded-2xl overflow-hidden border border-shinku/30 flex items-center justify-center cursor-zoom-in">
+                            <img id="img-croqui" src="img/Gemini_Generated_Image_dlrhj9dlrhj9dlrh.jfif"
+                                alt="Croqui Autoral Yasmin Chrispim & Apolo" loading="eager" decoding="async"
+                                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                            <div
+                                class="absolute bottom-3 left-3 text-xs font-cinzel text-kinari bg-black/70 px-3 py-1 rounded-full backdrop-blur-sm">
+                                Yasmin Chrispim & Apolo
+                            </div>
+                            <div class="absolute top-3 right-3 text-xs text-kinari bg-black/60 px-2.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+                                title="Ampliar imagem">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <p class="font-lora text-xs text-haizakura">Ilustração conceitual detalhando proporções, fendas
+                            inspiradas no Kimono e plissados sutis.</p>
+                    </div>
+                </div>
+
+                <!-- Quadro 2: Roupa Confeccionada -->
+                <div
+                    class="bg-kurotobi/80 border border-shinku/40 rounded-3xl p-6 flex flex-col justify-between hover:border-kinari/50 transition-all shadow-xl group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-cinzel text-xs font-bold text-shinku tracking-wider">02. CONFECÇÃO</span>
+                            <span class="text-xs text-haizakura">Peça Finalizada</span>
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-kinari">Roupa Confeccionada</h3>
+
+                        <!-- Image Display Container -->
+                        <div onclick="openLightbox('img/Gemini_Generated_Image_z4y595z4y595z4y5.jfif', '02. Roupa Confeccionada — Seda & Caimento Shibui')"
+                            class="relative w-full aspect-[3/4] bg-kurotobi rounded-2xl overflow-hidden border border-shinku/30 flex items-center justify-center cursor-zoom-in">
+                            <img id="img-roupa" src="img/Gemini_Generated_Image_z4y595z4y595z4y5.jfif"
+                                alt="Roupa Confeccionada" loading="eager" decoding="async"
+                                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                            <div
+                                class="absolute bottom-3 left-3 text-xs font-cinzel text-kinari bg-black/70 px-3 py-1 rounded-full backdrop-blur-sm">
+                                Seda & Caimento Shibui
+                            </div>
+                            <div class="absolute top-3 right-3 text-xs text-kinari bg-black/60 px-2.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+                                title="Ampliar imagem">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <p class="font-lora text-xs text-haizakura">A materialização física com tecidos nobres, alta
+                            costura feita à mão e costuras invisíveis.</p>
+                    </div>
+                </div>
+
+                <!-- Quadro 3: Modelo Real -->
+                <div
+                    class="bg-kurotobi/80 border border-shinku/40 rounded-3xl p-6 flex flex-col justify-between hover:border-kinari/50 transition-all shadow-xl group">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-cinzel text-xs font-bold text-shinku tracking-wider">03. PRESENÇA</span>
+                            <span class="text-xs text-haizakura">Modelo / Editorial</span>
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-kinari">Modelo Real</h3>
+
+                        <!-- Image Display Container -->
+                        <div onclick="openLightbox('img/Gemini_Generated_Image_m37xx4m37xx4m37x.jfif', '03. Modelo Real — Editorial Ateliê Autoral')"
+                            class="relative w-full aspect-[3/4] bg-kurotobi rounded-2xl overflow-hidden border border-shinku/30 flex items-center justify-center cursor-zoom-in">
+                            <img id="img-modelo" src="img/Gemini_Generated_Image_m37xx4m37xx4m37x.jfif"
+                                alt="Modelo Real Vestindo Além do Kimono" loading="eager" decoding="async"
+                                class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105">
+                            <div
+                                class="absolute bottom-3 left-3 text-xs font-cinzel text-kinari bg-black/70 px-3 py-1 rounded-full backdrop-blur-sm">
+                                Editorial Ateliê Autoral
+                            </div>
+                            <div class="absolute top-3 right-3 text-xs text-kinari bg-black/60 px-2.5 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"
+                                title="Ampliar imagem">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </div>
+                        </div>
+                        <p class="font-lora text-xs text-haizakura">A peça em movimento corporal, expressando força,
+                            elegância e a vivência do conceito Ma.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ DINÂMICO DE ESTILO ("DESCUBRA SEU VESTIDO IDEAL") -->
+    <section id="quiz" class="py-20 bg-seigaiha border-b border-shinku/30 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-kurotobi/90 rounded-3xl border border-shinku/50 p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+
+                <div class="text-center space-y-3 mb-8">
+                    <span class="text-xs font-cinzel text-shinku font-bold uppercase tracking-widest">Experiência
+                        Interativa</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-kinari">DESCUBRA SEU VESTIDO IDEAL</h2>
+                    <p class="font-lora text-haizakura text-sm">Responda a 4 perguntas simples para encontrar a silhueta
+                        autoral que traduz sua essência.</p>
+                </div>
+
+                <!-- Quiz Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between text-xs font-cinzel text-haizakura mb-2">
+                        <span id="quiz-step-text">Etapa 1 de 4</span>
+                        <span id="quiz-percent-text">25% Concluído</span>
+                    </div>
+                    <div class="w-full bg-kurotobi border border-shinku/30 h-2.5 rounded-full overflow-hidden">
+                        <div id="quiz-progress"
+                            class="bg-gradient-to-r from-shinku to-haizakura h-full w-1/4 transition-all duration-300">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Questions Container -->
+                <div id="quiz-questions-box" class="space-y-6">
+                    <!-- Q1 -->
+                    <div id="quiz-q1" class="quiz-question space-y-4">
+                        <h3 class="font-cinzel text-lg sm:text-xl font-semibold text-kinari">1. Qual a sua prioridade em
+                            uma peça de alta costura?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button onclick="answerQuiz(1, 'A', 'Caimento fluido e leveza extrema')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">A</span>
+                                <span>Caimento fluido, leveza e movimento livre.</span>
+                            </button>
+                            <button onclick="answerQuiz(1, 'B', 'Estrutura marcante com cintura acinturada')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">B</span>
+                                <span>Estrutura marcante, ombros destacados e faixa Obi.</span>
+                            </button>
+                            <button onclick="answerQuiz(1, 'C', 'Minimalismo poético e sobriedade')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">C</span>
+                                <span>Minimalismo poético, linhas retas e atemporais (Shibui).</span>
+                            </button>
+                            <button onclick="answerQuiz(1, 'D', 'Detalhes drapeados e camadas sobrepostas')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">D</span>
+                                <span>Drapeados complexos e camadas sobrepostas.</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div id="quiz-q2" class="quiz-question hidden space-y-4">
+                        <h3 class="font-cinzel text-lg sm:text-xl font-semibold text-kinari">2. Qual paleta visual
+                            traduz melhor sua presença?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button onclick="answerQuiz(2, 'A', 'Shinku (Vermelho Sangue) e Kurotobi (Preto)')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">A</span>
+                                <span>Tons dramáticos: Shinku (Blood Red) e Kurotobi.</span>
+                            </button>
+                            <button
+                                onclick="answerQuiz(2, 'B', 'Kinari-iro (Baunilha Crua) e Haizakura (Rosa Acinzentado)')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">B</span>
+                                <span>Tons etéreos: Kinari-iro (Vanilla) e Haizakura.</span>
+                            </button>
+                            <button onclick="answerQuiz(2, 'C', 'Uguisucha (Marrom Terroso Japonês) e Kinari')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">C</span>
+                                <span>Tons orgânicos: Uguisucha (Drab Brown) e Kinari.</span>
+                            </button>
+                            <button onclick="answerQuiz(2, 'D', 'Contraste Absoluto de Vermelho Shinku e Baunilha')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">D</span>
+                                <span>Alto contraste entre Shinku e Kinari-iro.</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div id="quiz-q3" class="quiz-question hidden space-y-4">
+                        <h3 class="font-cinzel text-lg sm:text-xl font-semibold text-kinari">3. Em qual momento especial
+                            você pretenderia vestir a peça?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button onclick="answerQuiz(3, 'A', 'Gala Noturno ou Evento de Grande Destaque')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">A</span>
+                                <span>Baile de Gala Noturno ou Tapete Vermelho.</span>
+                            </button>
+                            <button onclick="answerQuiz(3, 'B', 'Cerimônia Intimista e Sofisticada')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">B</span>
+                                <span>Cerimônia exclusiva ou celebração intimista.</span>
+                            </button>
+                            <button onclick="answerQuiz(3, 'C', 'Exposição de Arte ou Encontro Cultural')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">C</span>
+                                <span>Vernissage, exposição de arte ou coquetel cultural.</span>
+                            </button>
+                            <button onclick="answerQuiz(3, 'D', 'Editorial Fotográfico & Coleção Pessoal')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">D</span>
+                                <span>Editorial Fotográfico e arquivo de acervo autoral.</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div id="quiz-q4" class="quiz-question hidden space-y-4">
+                        <h3 class="font-cinzel text-lg sm:text-xl font-semibold text-kinari">4. Como você prefere o
+                            caimento no corpo?</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <button onclick="answerQuiz(4, 'A', 'Manga Kimono Ampla com Fenda Lateral')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">A</span>
+                                <span>Mangas Kimono dramáticas e fenda pronunciada.</span>
+                            </button>
+                            <button onclick="answerQuiz(4, 'B', 'Decote Transpassado Kimono com Faixa Obi Marcada')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">B</span>
+                                <span>Decote transpassado com faixa Obi alta.</span>
+                            </button>
+                            <button onclick="answerQuiz(4, 'C', 'Silhueta Reta Minimalista com Gola Escultura')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">C</span>
+                                <span>Silhueta reta minimalista com gola de estrutura limpa.</span>
+                            </button>
+                            <button onclick="answerQuiz(4, 'D', 'Caudal Origami Drapeado em Camadas')"
+                                class="p-4 rounded-2xl bg-kurotobi border border-shinku/30 hover:border-kinari/50 hover:bg-shinku/20 text-left font-lora text-sm transition-all flex items-center gap-3">
+                                <span
+                                    class="w-8 h-8 shrink-0 rounded-full bg-shinku/30 text-kinari font-cinzel flex items-center justify-center font-bold text-xs">D</span>
+                                <span>Caudal Origami drapeado em dobras geométricas.</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Results Container -->
+                <div id="quiz-result-box" class="hidden text-center space-y-6 pt-4">
+                    <div
+                        class="w-16 h-16 rounded-full bg-shinku/30 border border-shinku text-shinku flex items-center justify-center mx-auto text-3xl">
+                        <i class="fa-solid fa-gem"></i>
+                    </div>
+
+                    <div class="space-y-2">
+                        <span class="text-xs font-cinzel text-haizakura uppercase tracking-widest">Diagnóstico
+                            Personalizado de Estilo</span>
+                        <h3 id="quiz-result-title" class="font-cinzel text-2xl sm:text-3xl font-bold text-kinari"></h3>
+                        <p id="quiz-result-desc" class="font-lora text-haizakura text-sm sm:text-base max-w-xl mx-auto">
+                        </p>
+                    </div>
+
+                    <div
+                        class="p-4 rounded-2xl bg-kurotobi border border-shinku/40 text-left max-w-lg mx-auto space-y-2 text-xs font-sans">
+                        <div class="flex justify-between gap-4 border-b border-shinku/20 pb-1">
+                            <span class="text-haizakura">Silhueta Sugerida:</span>
+                            <span id="quiz-res-silhouette" class="text-kinari font-semibold text-right"></span>
+                        </div>
+                        <div class="flex justify-between gap-4 border-b border-shinku/20 pb-1">
+                            <span class="text-haizakura">Harmonia de Cores:</span>
+                            <span id="quiz-res-palette" class="text-kinari font-semibold text-right"></span>
+                        </div>
+                        <div class="flex justify-between gap-4">
+                            <span class="text-haizakura">Conceito Aplicado:</span>
+                            <span id="quiz-res-concept" class="text-kinari font-semibold text-right">Ma (間) & Shibui
+                                (渋い)</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                        <button onclick="applyQuizToForm()"
+                            class="w-full sm:w-auto px-8 py-4 rounded-xl bg-shinku hover:bg-shinku/90 text-kinari font-cinzel font-bold text-xs uppercase tracking-widest transition-all shadow-lg flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-signature"></i>
+                            <span>Aplicar no Formulário de Encomenda</span>
+                        </button>
+                        <button onclick="resetQuiz()"
+                            class="w-full sm:w-auto px-6 py-4 rounded-xl bg-uguisu/30 hover:bg-uguisu/50 text-kinari border border-kinari/20 font-cinzel text-xs uppercase tracking-widest">
+                            Refazer Quiz
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- PROVA SOCIAL & DEPOIMENTOS DE CLIENTES -->
+    <section id="avaliacoes" class="py-20 bg-kurotobi border-b border-shinku/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="space-y-3">
+                    <span class="text-xs font-cinzel text-shinku font-bold uppercase tracking-widest">Reconhecimento &
+                        Experiência</span>
+                    <h2 class="font-cinzel text-3xl sm:text-4xl font-bold text-kinari">O QUE DIZEM NOSSAS CLIENTES</h2>
+                    <p class="font-lora text-haizakura text-sm sm:text-base">Avaliação média 5.0 estrelas — Experiência
+                        autoral sob medida.</p>
+                </div>
+                <button onclick="openReviewModal()"
+                    class="self-start md:self-auto px-6 py-3 rounded-xl bg-shinku/20 hover:bg-shinku/40 border border-shinku/50 text-kinari font-cinzel text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Adicionar Avaliação</span>
+                </button>
+            </div>
+
+            <!-- Reviews Grid Container -->
+            <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Static Initial Reviews -->
+                <div class="bg-kurotobi/80 border border-shinku/30 rounded-3xl p-6 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex text-amber-400 gap-1 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-xs text-haizakura font-mono">São Paulo, SP</span>
+                    </div>
+                    <p class="font-lora text-sm italic text-kinari/90">
+                        "O vestido superou todas as minhas expectativas. A estrutura da faixa Obi somada ao caimento
+                        fluido das mangas trouxe uma presença única no evento."
+                    </p>
+                    <div class="pt-4 border-t border-shinku/20 flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-shinku/30 text-kinari font-cinzel font-bold flex items-center justify-center text-sm">
+                            MC
+                        </div>
+                        <div>
+                            <h4 class="font-cinzel text-sm font-bold text-kinari">Mariana Cavalcanti</h4>
+                            <p class="text-xs text-haizakura">Vestido Kimono Shinku Sob Medida</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-kurotobi/80 border border-shinku/30 rounded-3xl p-6 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex text-amber-400 gap-1 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-xs text-haizakura font-mono">Rio de Janeiro, RJ</span>
+                    </div>
+                    <p class="font-lora text-sm italic text-kinari/90">
+                        "A sensibilidade da Yasmin Chrispim e do Apolo durante a etapa de briefing foi incrível. Sentir
+                        o conceito Ma no meu próprio corpo foi transformador."
+                    </p>
+                    <div class="pt-4 border-t border-shinku/20 flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-uguisu/40 text-kinari font-cinzel font-bold flex items-center justify-center text-sm">
+                            BS
+                        </div>
+                        <div>
+                            <h4 class="font-cinzel text-sm font-bold text-kinari">Beatriz Siqueira</h4>
+                            <p class="text-xs text-haizakura">Coleção Shibui Baunilha</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-kurotobi/80 border border-shinku/30 rounded-3xl p-6 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex text-amber-400 gap-1 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                                class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-xs text-haizakura font-mono">Curitiba, PR</span>
+                    </div>
+                    <p class="font-lora text-sm italic text-kinari/90">
+                        "Um trabalho de alta costura com acabamento impecável. As cores da paleta oficial dão uma
+                        elegância atemporal e sofisticada."
+                    </p>
+                    <div class="pt-4 border-t border-shinku/20 flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-haizakura/40 text-kinari font-cinzel font-bold flex items-center justify-center text-sm">
+                            HT
+                        </div>
+                        <div>
+                            <h4 class="font-cinzel text-sm font-bold text-kinari">Helena Takahashi</h4>
+                            <p class="text-xs text-haizakura">Silhueta Drapeada Haizakura</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO DE BRIEFING & ENCOMENDA SOB MEDIDA -->
+    <section id="encomenda" class="py-20 bg-seigaiha border-b border-shinku/30">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-kurotobi/95 rounded-3xl border border-shinku/50 p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-shinku/30">
+                    <div>
+                        <span class="text-xs font-cinzel text-shinku font-bold uppercase tracking-widest">Atendimento
+                            Exclusivo</span>
+                        <h2 class="font-cinzel text-3xl font-bold text-kinari">BRIEFING & ENCOMENDA SOB MEDIDA</h2>
+                        <p class="font-lora text-xs text-haizakura mt-1">Preencha os dados abaixo para darmos início ao
+                            desenvolvimento do seu projeto autoral.</p>
+                    </div>
+
+                    <button type="button" onclick="openOrdersDrawer()"
+                        class="self-start sm:self-auto px-4 py-2.5 rounded-xl bg-uguisu/40 hover:bg-uguisu/60 border border-kinari/30 text-kinari text-xs font-cinzel font-semibold tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <span>Ver Pedidos Registrados</span>
+                    </button>
+                </div>
+
+                <form id="order-form" onsubmit="handleOrderSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+                        <!-- Nome Completo -->
+                        <div class="space-y-2">
+                            <label for="form-name"
+                                class="block text-xs font-cinzel text-kinari uppercase tracking-wider">Nome Completo
+                                *</label>
+                            <input type="text" id="form-name" required placeholder="Ex: Yasmin Chrispim"
+                                class="w-full bg-kurotobi border border-shinku/40 rounded-xl px-4 py-3 text-sm text-kinari placeholder-haizakura/50 focus:outline-none focus:border-kinari transition-colors">
+                        </div>
+
+                        <!-- E-mail -->
+                        <div class="space-y-2">
+                            <label for="form-email"
+                                class="block text-xs font-cinzel text-kinari uppercase tracking-wider">E-mail de Contato
+                                *</label>
+                            <input type="email" id="form-email" required placeholder="Ex: cliente@email.com"
+                                class="w-full bg-kurotobi border border-shinku/40 rounded-xl px-4 py-3 text-sm text-kinari placeholder-haizakura/50 focus:outline-none focus:border-kinari transition-colors">
+                        </div>
+
+                        <!-- Telefone / WhatsApp -->
+                        <div class="space-y-2">
+                            <label for="form-phone"
+                                class="block text-xs font-cinzel text-kinari uppercase tracking-wider">WhatsApp /
+                                Telefone *</label>
+                            <input type="tel" id="form-phone" required placeholder="Ex: (11) 99999-9999"
+                                class="w-full bg-kurotobi border border-shinku/40 rounded-xl px-4 py-3 text-sm text-kinari placeholder-haizakura/50 focus:outline-none focus:border-kinari transition-colors">
+                        </div>
+
+                        <!-- Estilo Preferido -->
+                        <div class="space-y-2">
+                            <label for="form-style"
+                                class="block text-xs font-cinzel text-kinari uppercase tracking-wider">Estilo
+                                Diagnosticado / Preferido</label>
+                            <input type="text" id="form-style" placeholder="Preenchido via Quiz ou digite livremente"
+                                class="w-full bg-kurotobi border border-shinku/40 rounded-xl px-4 py-3 text-sm text-kinari placeholder-haizakura/50 focus:outline-none focus:border-kinari transition-colors">
+                        </div>
+
+                    </div>
+
+                    <!-- Medidas Aproximadas -->
+                    <div class="p-4 rounded-2xl bg-kurotobi/60 border border-shinku/30 space-y-4">
+                        <span class="text-xs font-cinzel text-haizakura uppercase tracking-widest block">Medidas
+                            Aproximadas (Opcional)</span>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <div>
+                                <label for="form-bust"
+                                    class="block text-[10px] font-cinzel text-haizakura uppercase">Busto (cm)</label>
+                                <input type="number" id="form-bust" placeholder="Ex: 90"
+                                    class="w-full bg-kurotobi border border-shinku/30 rounded-lg px-3 py-2 text-xs text-kinari focus:outline-none focus:border-kinari">
+                            </div>
+                            <div>
+                                <label for="form-waist"
+                                    class="block text-[10px] font-cinzel text-haizakura uppercase">Cintura (cm)</label>
+                                <input type="number" id="form-waist" placeholder="Ex: 70"
+                                    class="w-full bg-kurotobi border border-shinku/30 rounded-lg px-3 py-2 text-xs text-kinari focus:outline-none focus:border-kinari">
+                            </div>
+                            <div>
+                                <label for="form-hip"
+                                    class="block text-[10px] font-cinzel text-haizakura uppercase">Quadril (cm)</label>
+                                <input type="number" id="form-hip" placeholder="Ex: 98"
+                                    class="w-full bg-kurotobi border border-shinku/30 rounded-lg px-3 py-2 text-xs text-kinari focus:outline-none focus:border-kinari">
+                            </div>
+                            <div>
+                                <label for="form-height"
+                                    class="block text-[10px] font-cinzel text-haizakura uppercase">Altura (cm)</label>
+                                <input type="number" id="form-height" placeholder="Ex: 168"
+                                    class="w-full bg-kurotobi border border-shinku/30 rounded-lg px-3 py-2 text-xs text-kinari focus:outline-none focus:border-kinari">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cor Preferida & Observações -->
+                    <div class="space-y-2">
+                        <label for="form-notes"
+                            class="block text-xs font-cinzel text-kinari uppercase tracking-wider">Cor Preferida &
+                            Observações do Briefing</label>
+                        <textarea id="form-notes" rows="4"
+                            placeholder="Conte mais sobre o vestido dos seus sonhos, detalhes de caimento ou inspirações preferidas..."
+                            class="w-full bg-kurotobi border border-shinku/40 rounded-xl px-4 py-3 text-sm text-kinari placeholder-haizakura/50 focus:outline-none focus:border-kinari transition-colors"></textarea>
+                    </div>
+
+                    <!-- Botão de Envio -->
+                    <button type="submit"
+                        class="w-full py-4 rounded-xl bg-shinku hover:bg-shinku/90 text-kinari font-cinzel font-bold text-sm uppercase tracking-widest transition-all shadow-xl hover:shadow-shinku/40 flex items-center justify-center gap-3 border border-kinari/20">
+                        <i class="fa-regular fa-paper-plane"></i>
+                        <span>Enviar Pedido de Encomenda</span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ 100% INTERATIVO -->
+    <footer class="bg-kurotobi border-t border-shinku/40 pt-16 pb-12 text-haizakura relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-shinku/20">
+
+                <!-- Col 1: Marca & Créditos -->
+                <div class="space-y-4 md:col-span-2">
+                    <h3 class="font-cinzel text-2xl font-bold text-kinari tracking-wider">ALÉM DO KIMONO</h3>
+                    <p class="font-lora text-xs sm:text-sm text-haizakura max-w-md leading-relaxed">
+                        Ateliê autoral focado na alta costura e vestidos sob medida. A celebração da sutileza e da
+                        estética japonesa reinterpretada para a moda contemporânea.
+                    </p>
+                    <div class="text-xs font-cinzel text-kinari/80 pt-2 space-y-1">
+                        <p><i class="fa-solid fa-code text-shinku mr-2"></i>Desenvolvido por: <strong
+                                class="text-kinari">Yasmin Chrispim & Apolo</strong></p>
+                        <p><i class="fa-solid fa-school text-shinku mr-2"></i>3º AD — Marketing — Orientação: <strong
+                                class="text-kinari">Prof. Maurício</strong></p>
+                    </div>
+                </div>
+
+                <!-- Col 2: Canais Ateliê (Copiáveis/Modais) -->
+                <div class="space-y-3">
+                    <h4 class="font-cinzel text-sm font-bold text-kinari uppercase tracking-widest">Canais Ateliê</h4>
+                    <ul class="space-y-2 text-xs font-sans">
+                        <!-- Instagram Modal Trigger -->
+                        <li>
+                            <button onclick="openInstagramModal()"
+                                class="hover:text-kinari transition-colors flex items-center gap-2">
+                                <i class="fa-brands fa-instagram text-shinku"></i>
+                                <span>@alemdokimono.atelie</span>
+                            </button>
+                        </li>
+                        <!-- Email Direct Copy -->
+                        <li>
+                            <button onclick="copyFooterEmail()"
+                                class="hover:text-kinari transition-colors flex items-center gap-2 group text-left">
+                                <i class="fa-regular fa-envelope text-shinku"></i>
+                                <span
+                                    class="underline decoration-shinku/40 group-hover:decoration-kinari">contato@alemdokimono.com.br</span>
+                            </button>
+                        </li>
+                        <!-- Website QR Modal Trigger -->
+                        <li>
+                            <button onclick="openWebsiteModal()"
+                                class="hover:text-kinari transition-colors flex items-center gap-2">
+                                <i class="fa-solid fa-globe text-shinku"></i>
+                                <span>www.alemdokimono.com.br</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Navegação Rápida -->
+                <div class="space-y-3">
+                    <h4 class="font-cinzel text-sm font-bold text-kinari uppercase tracking-widest">Navegação</h4>
+                    <ul class="space-y-2 text-xs font-sans">
+                        <li><a href="#historia" class="hover:text-kinari transition-colors">Nossa História</a></li>
+                        <li><a href="#vitrine" class="hover:text-kinari transition-colors">Coleção & Galeria</a></li>
+                        <li><a href="#quiz" class="hover:text-kinari transition-colors">Quiz de Estilo</a></li>
+                        <li><a href="#encomenda" class="hover:text-kinari transition-colors">Encomendar Sob Medida</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Scroll To Top -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-cinzel">
+                <p>&copy; 2026 Além do Kimono — Ateliê Autoral. Todos os direitos reservados.</p>
+
+                <button onclick="scrollToTop()"
+                    class="px-4 py-2 rounded-xl bg-shinku/20 hover:bg-shinku/40 border border-shinku/40 text-kinari transition-colors flex items-center gap-2">
+                    <span>Voltar ao topo</span>
+                    <i class="fa-solid fa-arrow-up"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAIS E COMPONENTES INTERATIVOS DA INTERFACE -->
+
+    <!-- Modal Instagram -->
+    <div id="modal-instagram" onclick="handleBackdropClick(event, 'modal-instagram')"
+        class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-kurotobi border border-shinku/50 rounded-3xl max-w-md w-full p-6 space-y-6 shadow-2xl relative">
+            <button onclick="closeModal('modal-instagram')" aria-label="Fechar"
+                class="absolute top-4 right-4 text-haizakura hover:text-kinari">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="text-center space-y-3">
+                <div
+                    class="w-16 h-16 rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 p-1 mx-auto flex items-center justify-center">
+                    <div
+                        class="w-full h-full bg-kurotobi rounded-full flex items-center justify-center text-2xl text-kinari">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+                <h3 class="font-cinzel text-xl font-bold text-kinari">@alemdokimono.atelie</h3>
+                <p class="font-lora text-xs text-haizakura">Acompanhe os bastidores de alta costura, croquis autorais de
+                    Yasmin Chrispim & Apolo e provas de vestidos sob medida.</p>
+            </div>
+            <div class="space-y-3">
+                <button
+                    onclick="copyToClipboard('https://instagram.com/alemdokimono.atelie', 'Link do Instagram copiado!')"
+                    class="w-full py-3 rounded-xl bg-shinku text-kinari font-cinzel font-bold text-xs uppercase tracking-wider hover:bg-shinku/80 transition-colors flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-copy"></i> Copiar Link do Perfil
+                </button>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                    class="w-full py-3 rounded-xl bg-uguisu/30 text-kinari font-cinzel font-semibold text-xs uppercase tracking-wider text-center block hover:bg-uguisu/50 border border-kinari/20">
+                    Abrir no Instagram <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Website & QR Code -->
+    <div id="modal-website" onclick="handleBackdropClick(event, 'modal-website')"
+        class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div
+            class="bg-kurotobi border border-shinku/50 rounded-3xl max-w-md w-full p-6 space-y-6 shadow-2xl relative text-center">
+            <button onclick="closeModal('modal-website')" aria-label="Fechar"
+                class="absolute top-4 right-4 text-haizakura hover:text-kinari">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="font-cinzel text-xl font-bold text-kinari">WEBSITE OFICIAL</h3>
+            <p class="font-lora text-xs text-haizakura">Acesse nosso catálogo autoral escaneando o QR Code ou copiando o
+                domínio oficial.</p>
+
+            <!-- Dynamic Generated QR Code -->
+            <div class="w-48 h-48 mx-auto bg-white p-3 rounded-2xl shadow-inner flex items-center justify-center">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://www.alemdokimono.com.br&color=310E10"
+                    alt="QR Code Além do Kimono" class="w-full h-full">
+            </div>
+
+            <p class="text-xs font-mono text-kinari font-semibold">www.alemdokimono.com.br</p>
+
+            <button onclick="copyToClipboard('www.alemdokimono.com.br', 'URL do website copiada!')"
+                class="w-full py-3 rounded-xl bg-shinku text-kinari font-cinzel font-bold text-xs uppercase tracking-wider hover:bg-shinku/80 transition-colors">
+                <i class="fa-regular fa-copy mr-2"></i> Copiar Domínio
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Adicionar Avaliação -->
+    <div id="modal-review" onclick="handleBackdropClick(event, 'modal-review')"
+        class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-kurotobi border border-shinku/50 rounded-3xl max-w-lg w-full p-6 space-y-6 shadow-2xl relative">
+            <button onclick="closeModal('modal-review')" aria-label="Fechar"
+                class="absolute top-4 right-4 text-haizakura hover:text-kinari">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <div class="space-y-1">
+                <h3 class="font-cinzel text-xl font-bold text-kinari">Nova Avaliação Autoral</h3>
+                <p class="font-lora text-xs text-haizakura">Compartilhe sua experiência de confecção com o ateliê.</p>
+            </div>
+
+            <form id="review-form" onsubmit="submitNewReview(event)" class="space-y-4">
+                <div>
+                    <label for="rev-name" class="block text-xs font-cinzel text-kinari uppercase">Seu Nome *</label>
+                    <input type="text" id="rev-name" required placeholder="Ex: Camila Nogueira"
+                        class="w-full bg-kurotobi border border-shinku/30 rounded-xl px-4 py-2.5 text-xs text-kinari focus:outline-none focus:border-kinari">
+                </div>
+                <div>
+                    <label for="rev-city" class="block text-xs font-cinzel text-kinari uppercase">Cidade / Estado
+                        *</label>
+                    <input type="text" id="rev-city" required placeholder="Ex: Belo Horizonte, MG"
+                        class="w-full bg-kurotobi border border-shinku/30 rounded-xl px-4 py-2.5 text-xs text-kinari focus:outline-none focus:border-kinari">
+                </div>
+                <div>
+                    <label for="rev-piece" class="block text-xs font-cinzel text-kinari uppercase">Peça Adquirida
+                        *</label>
+                    <input type="text" id="rev-piece" required placeholder="Ex: Vestido Origami Shibui"
+                        class="w-full bg-kurotobi border border-shinku/30 rounded-xl px-4 py-2.5 text-xs text-kinari focus:outline-none focus:border-kinari">
+                </div>
+                <div>
+                    <label for="rev-text" class="block text-xs font-cinzel text-kinari uppercase">Seu Depoimento
+                        *</label>
+                    <textarea id="rev-text" rows="3" required
+                        placeholder="Descreva o caimento, atendimento de Yasmin Chrispim & Apolo e acabamento..."
+                        class="w-full bg-kurotobi border border-shinku/30 rounded-xl px-4 py-2.5 text-xs text-kinari focus:outline-none focus:border-kinari"></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full py-3 rounded-xl bg-shinku text-kinari font-cinzel font-bold text-xs uppercase tracking-wider hover:bg-shinku/80 transition-colors">
+                    Publicar Depoimento
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Confirmação de Encomenda -->
+    <div id="modal-order-success" onclick="handleBackdropClick(event, 'modal-order-success')"
+        class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div
+            class="bg-kurotobi border border-shinku/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl relative text-center">
+            <div
+                class="w-16 h-16 rounded-full bg-emerald-900/40 border border-emerald-500 text-emerald-400 flex items-center justify-center mx-auto text-3xl">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div class="space-y-2">
+                <h3 class="font-cinzel text-2xl font-bold text-kinari">BRIEFING REGISTRADO COM SUCESSO!</h3>
+                <p class="font-lora text-xs text-haizakura">O ateliê autoral de Yasmin Chrispim & Apolo já recebeu suas
+                    especificações.</p>
+            </div>
+
+            <div id="order-summary-box"
+                class="p-4 rounded-2xl bg-kurotobi/80 border border-shinku/30 text-left font-mono text-xs text-kinari/90 space-y-1.5 max-h-48 overflow-y-auto">
+                <!-- Dynamic Summary Inserted via JS -->
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button onclick="copyOrderSummary()"
+                    class="py-2.5 px-3 rounded-xl bg-shinku/30 border border-shinku/50 hover:bg-shinku/50 text-kinari text-xs font-cinzel">
+                    <i class="fa-regular fa-copy mr-1"></i> Copiar Resumo
+                </button>
+                <a id="btn-whatsapp-send" target="_blank" rel="noopener noreferrer" href="#"
+                    class="py-2.5 px-3 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-cinzel flex items-center justify-center">
+                    <i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp
+                </a>
+                <a id="btn-email-send" href="#"
+                    class="py-2.5 px-3 rounded-xl bg-uguisu/40 hover:bg-uguisu/60 border border-kinari/30 text-kinari text-xs font-cinzel flex items-center justify-center">
+                    <i class="fa-regular fa-envelope mr-1"></i> Enviar Email
+                </a>
+            </div>
+
+            <button onclick="closeModal('modal-order-success')"
+                class="w-full py-3 rounded-xl bg-shinku text-kinari font-cinzel font-bold text-xs uppercase tracking-wider">
+                Fechar e Retornar ao Ateliê
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal Lightbox da Vitrine (Visualização Ampliada em Alta Resolução) -->
+    <div id="modal-lightbox" onclick="handleBackdropClick(event, 'modal-lightbox')"
+        class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full flex flex-col items-center gap-4">
+            <button onclick="closeModal('modal-lightbox')" aria-label="Fechar ampliação"
+                class="self-end text-kinari/80 hover:text-kinari bg-kurotobi/80 border border-shinku/50 w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <img id="lightbox-img" src="" alt="Visualização ampliada"
+                class="max-h-[82vh] max-w-full w-auto h-auto object-contain rounded-2xl border border-shinku/50 shadow-2xl">
+            <p id="lightbox-caption" class="font-cinzel text-xs sm:text-sm text-kinari tracking-wider text-center"></p>
+        </div>
+    </div>
+
+    <!-- Drawer / Painel Lateral de Pedidos Registrados -->
+    <div id="drawer-orders"
+        class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-kurotobi border-l border-shinku/50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-6 border-b border-shinku/30 flex items-center justify-between">
+            <div>
+                <h3 class="font-cinzel text-lg font-bold text-kinari">PAINEL DO ATELIÊ</h3>
+                <p class="text-xs text-haizakura">Pedidos e Briefings Registrados</p>
+            </div>
+            <button onclick="closeOrdersDrawer()" aria-label="Fechar painel"
+                class="text-haizakura hover:text-kinari p-2">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <div id="orders-list-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Dynamic Orders Loaded Here -->
+        </div>
+
+        <div class="p-4 border-t border-shinku/30 bg-kurotobi/90">
+            <button onclick="clearAllOrders()"
+                class="w-full py-2.5 rounded-xl bg-red-950/40 border border-red-800/40 hover:bg-red-900/50 text-red-300 text-xs font-cinzel">
+                Limpar Histórico Local
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT PRINCIPAL E INTERATIVIDADES -->
+    <script>
+        // State Global do Quiz e Aplicação
+        const quizData = {
+            step: 1,
+            answers: {},
+            choices: []
+        };
+
+        // Respostas / Resultados do Quiz
+        const quizOutcomes = {
+            "A": {
+                title: "Silhueta Dragão Minimalista (Manga Kimono)",
+                desc: "Sua personalidade exige movimento e impacto visual. Mangas dramáticas inspiradas nos Kimonos tradicionais combinadas a fendas sutis.",
+                silhouette: "Mangas Amplas Kimono & Fenda Autoral",
+                palette: "Shinku (Blood Red) & Kurotobi (Preto)"
+            },
+            "B": {
+                title: "Vestido Kimono Transpassado com Obi",
+                desc: "A perfeita simbiose entre estrutura marcante e feminilidade. A faixa Obi delineia a cintura trazendo imponência e sofisticação.",
+                silhouette: "Decote V Transpassado & Faixa Obi Marcada",
+                palette: "Kinari-iro (Vanilla) & Haizakura"
+            },
+            "C": {
+                title: "Vestido Reta Conceitual Shibui",
+                desc: "Luxo silencioso e minimalismo poético. Linhas limpas sem excesso de adornos, priorizando o toque nobre da seda.",
+                silhouette: "Corte Reto Minimalista & Gola Escultura",
+                palette: "Uguisucha (Marrom Terroso) & Kinari"
+            },
+            "D": {
+                title: "Vestido Caudal Origami Drapeado",
+                desc: "Escultura vestível. Camadas sobrepostas e dobras geométricas drapeadas à mão com o mais alto rigor de alta costura.",
+                silhouette: "Camadas Origami & Drapeado Assimétrico",
+                palette: "Contraste Shinku & Kinari-iro"
+            }
+        };
+
+        // Escape seguro para strings inseridas no DOM
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        // Inicialização ao Carregar a Página
+        window.addEventListener('DOMContentLoaded', function () {
+            loadSavedReviews();
+            setupMobileMenu();
+            setupKeyboardShortcuts();
+        });
+
+        // Toast Notification System
+        function showToast(message, icon = 'fa-check') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'pointer-events-auto flex items-center gap-3 bg-kurotobi border border-shinku px-4 py-3 rounded-xl shadow-2xl text-kinari text-xs font-sans transition-opacity duration-500';
+            toast.innerHTML = `<i class="fa-solid ${icon} text-shinku text-base"></i> <span>${escapeHtml(message)}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+
+        // Copy Color Functionality
+        function copyColor(hex, name) {
+            copyToClipboard(hex, `Cor ${name} (${hex}) copiada para a área de transferência!`);
+        }
+
+        // Helper genérico para copiar texto (Clipboard API com fallback)
+        function copyToClipboard(text, successMessage = 'Copiado com sucesso!') {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(successMessage, 'fa-copy');
+                }).catch(() => {
+                    fallbackCopyText(text, successMessage);
+                });
+            } else {
+                fallbackCopyText(text, successMessage);
+            }
+        }
+
+        function fallbackCopyText(text, successMessage) {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = text;
+            tempInput.style.position = 'fixed';
+            tempInput.style.opacity = '0';
+            document.body.appendChild(tempInput);
+            tempInput.focus();
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast(successMessage, 'fa-copy');
+            } catch (err) {
+                showToast('Não foi possível copiar automaticamente.', 'fa-circle-exclamation');
+            }
+            document.body.removeChild(tempInput);
+        }
+
+        // Custom Image Persistence
+        function loadSavedImages() {
+            ['croqui', 'roupa', 'modelo'].forEach(key => {
+                const saved = localStorage.getItem('atelie_img_' + key);
+                if (saved) {
+                    const imgElem = document.getElementById('img-' + key);
+                    if (imgElem) imgElem.src = saved;
+                }
+            });
+        }
+
+        // Lógica do Quiz de Estilo (calculado a partir das respostas escolhidas)
+        function answerQuiz(step, optionKey, answerText) {
+            quizData.answers[step] = answerText;
+            quizData.choices.push(optionKey);
+
+            // Oculta questão atual
+            document.getElementById(`quiz-q${step}`).classList.add('hidden');
+
+            if (step < 4) {
+                quizData.step = step + 1;
+                document.getElementById(`quiz-q${step + 1}`).classList.remove('hidden');
+
+                // Atualiza barra de progresso
+                const percent = (quizData.step / 4) * 100;
+                document.getElementById('quiz-progress').style.width = `${percent}%`;
+                document.getElementById('quiz-step-text').innerText = `Etapa ${quizData.step} de 4`;
+                document.getElementById('quiz-percent-text').innerText = `${percent}% Concluído`;
+            } else {
+                // Finaliza Quiz e Mostra Resultados
+                document.getElementById('quiz-questions-box').classList.add('hidden');
+                document.getElementById('quiz-progress').style.width = '100%';
+                document.getElementById('quiz-step-text').innerText = 'Concluído';
+                document.getElementById('quiz-percent-text').innerText = '100%';
+
+                // Determina Diagnóstico com base na opção predominante (desempate pela Q4)
+                const counts = { A: 0, B: 0, C: 0, D: 0 };
+                quizData.choices.forEach(c => {
+                    if (counts[c] !== undefined) counts[c]++;
+                });
+
+                let outcomeKey = quizData.choices[quizData.choices.length - 1] || 'A';
+                let maxCount = 0;
+                ['A', 'B', 'C', 'D'].forEach(k => {
+                    if (counts[k] > maxCount) {
+                        maxCount = counts[k];
+                        outcomeKey = k;
+                    } else if (counts[k] === maxCount && k === quizData.choices[3]) {
+                        outcomeKey = k;
+                    }
+                });
+
+                const result = quizOutcomes[outcomeKey];
+
+                document.getElementById('quiz-result-title').innerText = result.title;
+                document.getElementById('quiz-result-desc').innerText = result.desc;
+                document.getElementById('quiz-res-silhouette').innerText = result.silhouette;
+                document.getElementById('quiz-res-palette').innerText = result.palette;
+
+                document.getElementById('quiz-result-box').classList.remove('hidden');
+            }
+        }
+
+        function resetQuiz() {
+            quizData.step = 1;
+            quizData.answers = {};
+            quizData.choices = [];
+            document.getElementById('quiz-result-box').classList.add('hidden');
+            document.getElementById('quiz-questions-box').classList.remove('hidden');
+
+            for (let i = 1; i <= 4; i++) {
+                const q = document.getElementById(`quiz-q${i}`);
+                if (i === 1) q.classList.remove('hidden');
+                else q.classList.add('hidden');
+            }
+
+            document.getElementById('quiz-progress').style.width = '25%';
+            document.getElementById('quiz-step-text').innerText = 'Etapa 1 de 4';
+            document.getElementById('quiz-percent-text').innerText = '25% Concluído';
+        }
+
+        function applyQuizToForm() {
+            const styleTitle = document.getElementById('quiz-result-title').innerText;
+            const silhouette = document.getElementById('quiz-res-silhouette').innerText;
+
+            document.getElementById('form-style').value = styleTitle;
+            const notesElem = document.getElementById('form-notes');
+            notesElem.value = `[Estilo Diagnosticado via Quiz]: ${styleTitle}\n[Silhueta Sugerida]: ${silhouette}\n\nGostaria de agendar prova presencial/virtual.`;
+
+            // Rolagem suave até o formulário de encomenda
+            document.getElementById('encomenda').scrollIntoView({ behavior: 'smooth' });
+            showToast('Diagnóstico do Quiz aplicado ao formulário!');
+        }
+
+        // Submissão do Formulário de Encomenda
+        let lastOrderData = null;
+
+        function handleOrderSubmit(e) {
+            e.preventDefault();
+
+            const order = {
+                id: 'ORD-' + Date.now().toString().slice(-6),
+                date: new Date().toLocaleDateString('pt-BR'),
+                name: document.getElementById('form-name').value.trim(),
+                email: document.getElementById('form-email').value.trim(),
+                phone: document.getElementById('form-phone').value.trim(),
+                style: document.getElementById('form-style').value.trim() || 'Alta Costura Personalizada',
+                bust: document.getElementById('form-bust').value.trim() || '-',
+                waist: document.getElementById('form-waist').value.trim() || '-',
+                hip: document.getElementById('form-hip').value.trim() || '-',
+                height: document.getElementById('form-height').value.trim() || '-',
+                notes: document.getElementById('form-notes').value.trim() || 'Sem observações adicionais.'
+            };
+
+            lastOrderData = order;
+
+            // Salvar no localStorage
+            const savedOrders = JSON.parse(localStorage.getItem('atelie_orders') || '[]');
+            savedOrders.unshift(order);
+            localStorage.setItem('atelie_orders', JSON.stringify(savedOrders));
+
+            // Preencher resumo no modal
+            const summaryHtml = `
+                <div><strong>CÓDIGO:</strong> ${escapeHtml(order.id)} (${escapeHtml(order.date)})</div>
+                <div><strong>CLIENTE:</strong> ${escapeHtml(order.name)}</div>
+                <div><strong>E-MAIL:</strong> ${escapeHtml(order.email)}</div>
+                <div><strong>WHATSAPP:</strong> ${escapeHtml(order.phone)}</div>
+                <div><strong>ESTILO:</strong> ${escapeHtml(order.style)}</div>
+                <div><strong>MEDIDAS:</strong> Busto: ${escapeHtml(order.bust)}cm | Cintura: ${escapeHtml(order.waist)}cm | Quadril: ${escapeHtml(order.hip)}cm | Altura: ${escapeHtml(order.height)}cm</div>
+                <div><strong>NOTAS:</strong> ${escapeHtml(order.notes)}</div>
+            `;
+            document.getElementById('order-summary-box').innerHTML = summaryHtml;
+
+            // Configurar botões externos
+            const waText = encodeURIComponent(`Olá Yasmin Chrispim & Apolo! Meu nome é ${order.name}. Gostaria de confirmar meu pedido de encomenda (${order.id}):\nEstilo: ${order.style}\nTelefone: ${order.phone}`);
+            document.getElementById('btn-whatsapp-send').href = `https://wa.me/5511999999999?text=${waText}`;
+
+            const emailSubj = encodeURIComponent(`Pedido de Encomenda ${order.id} - ${order.name}`);
+            const emailBody = encodeURIComponent(`Olá Yasmin Chrispim & Apolo (Ateliê Além do Kimono),\n\nSegue o briefing da minha encomenda sob medida:\n\nNome: ${order.name}\nWhatsApp: ${order.phone}\nEstilo: ${order.style}\nMedidas: Busto ${order.bust} | Cintura ${order.waist} | Quadril ${order.hip} | Altura ${order.height}\n\nObservações: ${order.notes}`);
+            document.getElementById('btn-email-send').href = `mailto:contato@alemdokimono.com.br?subject=${emailSubj}&body=${emailBody}`;
+
+            // Resetar form e abrir modal
+            document.getElementById('order-form').reset();
+            openModal('modal-order-success');
+        }
+
+        function copyOrderSummary() {
+            if (lastOrderData) {
+                const text = `PEDIDO ATELIÊ ALÉM DO KIMONO (${lastOrderData.id})\nCliente: ${lastOrderData.name}\nEmail: ${lastOrderData.email}\nWhatsApp: ${lastOrderData.phone}\nEstilo: ${lastOrderData.style}\nObservações: ${lastOrderData.notes}`;
+                copyToClipboard(text, 'Resumo do pedido copiado!');
+            }
+        }
+
+        // Painel Drawer de Pedidos Salvos
+        function openOrdersDrawer() {
+            renderOrdersList();
+            document.getElementById('drawer-orders').classList.remove('translate-x-full');
+        }
+
+        function closeOrdersDrawer() {
+            document.getElementById('drawer-orders').classList.add('translate-x-full');
+        }
+
+        function renderOrdersList() {
+            const container = document.getElementById('orders-list-container');
+            const savedOrders = JSON.parse(localStorage.getItem('atelie_orders') || '[]');
+
+            if (savedOrders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-haizakura space-y-2">
+                        <i class="fa-solid fa-inbox text-3xl"></i>
+                        <p class="text-xs font-lora">Nenhum pedido registrado até o momento.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = savedOrders.map(ord => `
+                <div class="bg-kurotobi/80 border border-shinku/30 rounded-2xl p-4 space-y-2 text-xs font-sans">
+                    <div class="flex items-center justify-between border-b border-shinku/20 pb-2">
+                        <span class="font-mono font-bold text-shinku">${escapeHtml(ord.id)}</span>
+                        <span class="text-[10px] text-haizakura">${escapeHtml(ord.date)}</span>
+                    </div>
+                    <div class="text-kinari font-semibold">${escapeHtml(ord.name)}</div>
+                    <div class="text-haizakura text-[11px]">${escapeHtml(ord.email)} | ${escapeHtml(ord.phone)}</div>
+                    <div class="text-kinari/80 italic font-lora pt-1">Estilo: ${escapeHtml(ord.style)}</div>
+                    <div class="text-[10px] text-haizakura">Medidas: B:${escapeHtml(ord.bust)} | C:${escapeHtml(ord.waist)} | Q:${escapeHtml(ord.hip)} | A:${escapeHtml(ord.height)}</div>
+                </div>
+            `).join('');
+        }
+
+        function clearAllOrders() {
+            if (confirm('Deseja realmente apagar todos os briefings registrados localmente?')) {
+                localStorage.removeItem('atelie_orders');
+                renderOrdersList();
+                showToast('Histórico de pedidos limpo com sucesso.');
+            }
+        }
+
+        // Modal de Avaliações
+        function openReviewModal() {
+            openModal('modal-review');
+        }
+
+        function createReviewCardHtml(rev) {
+            return `
+                <div class="bg-kurotobi/80 border border-shinku/30 rounded-3xl p-6 space-y-4 shadow-xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex text-amber-400 gap-1 text-sm">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-xs text-haizakura font-mono">${escapeHtml(rev.city)}</span>
+                    </div>
+                    <p class="font-lora text-sm italic text-kinari/90">
+                        "${escapeHtml(rev.text)}"
+                    </p>
+                    <div class="pt-4 border-t border-shinku/20 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-shinku/40 text-kinari font-cinzel font-bold flex items-center justify-center text-sm">
+                            ${escapeHtml(rev.initials)}
+                        </div>
+                        <div>
+                            <h4 class="font-cinzel text-sm font-bold text-kinari">${escapeHtml(rev.name)}</h4>
+                            <p class="text-xs text-haizakura">${escapeHtml(rev.piece)}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function submitNewReview(e) {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value.trim();
+            const city = document.getElementById('rev-city').value.trim();
+            const piece = document.getElementById('rev-piece').value.trim();
+            const text = document.getElementById('rev-text').value.trim();
+
+            const initials = name.split(/\s+/).filter(Boolean).map(n => n[0]).join('').substring(0, 2).toUpperCase();
+            const review = { name, city, piece, text, initials };
+
+            document.getElementById('reviews-grid').insertAdjacentHTML('afterbegin', createReviewCardHtml(review));
+
+            // Salvar depoimento no LocalStorage
+            const savedReviews = JSON.parse(localStorage.getItem('atelie_reviews') || '[]');
+            savedReviews.unshift(review);
+            localStorage.setItem('atelie_reviews', JSON.stringify(savedReviews));
+
+            document.getElementById('review-form').reset();
+            closeModal('modal-review');
+            showToast('Sua avaliação foi publicada com sucesso!');
+        }
+
+        function loadSavedReviews() {
+            const savedReviews = JSON.parse(localStorage.getItem('atelie_reviews') || '[]');
+            // Inserir do mais antigo para o mais recente com afterbegin mantém a ordem mais recente primeiro
+            [...savedReviews].reverse().forEach(rev => {
+                document.getElementById('reviews-grid').insertAdjacentHTML('afterbegin', createReviewCardHtml(rev));
+            });
+        }
+
+        // Rodapé e Modais Específicos
+        function openInstagramModal() {
+            openModal('modal-instagram');
+        }
+
+        function openWebsiteModal() {
+            openModal('modal-website');
+        }
+
+        function copyFooterEmail() {
+            copyToClipboard('contato@alemdokimono.com.br', 'E-mail do ateliê copiado para a área de transferência!');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // General Modal Helpers
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function handleBackdropClick(event, id) {
+            if (event.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        function openLightbox(src, caption) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-img').alt = caption;
+            document.getElementById('lightbox-caption').innerText = caption;
+            openModal('modal-lightbox');
+        }
+
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    ['modal-instagram', 'modal-website', 'modal-review', 'modal-order-success', 'modal-lightbox'].forEach(closeModal);
+                    closeOrdersDrawer();
+                }
+            });
+        }
+
+        function setupMobileMenu() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
